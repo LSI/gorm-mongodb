@@ -110,8 +110,10 @@ task copyResources(type:Copy) {
     into "${project.buildDir}/docs"
 }
 
-task docs(dependsOn:[asciidoctor, copyDocs, copyResources] + subprojects.findAll { project -> project.tasks.findByName('groovydoc')}
-                .collect { project -> project.tasks.groovydoc })
+//task docs(dependsOn:[asciidoctor, copyDocs, copyResources] + subprojects.findAll { project -> project.tasks.findByName('groovydoc')}
+//                .NOcollect { project -> project.tasks.groovydoc })
+
+task docs(dependsOn: [asciidoctor, copyDocs, copyResources])
 
 //task assemble(type: Zip, dependsOn:docs) {
 //    from "${project.buildDir}/docs"

@@ -79,6 +79,7 @@ subprojects { project ->
         configurations.all {
             resolutionStrategy.eachDependency { DependencyResolveDetails details ->
                 if(details.requested.group == 'org.codehaus.groovy' && details.requested.name.startsWith('groovy')) {
+                    println "1 --- ${groovyVersion}"
                     details.useVersion(groovyVersion)
                 }
                 if(details.requested.group == 'org.springframework') {
@@ -193,6 +194,7 @@ subprojects { project ->
     }
 
     dependencies {
+        println "2 --- ${groovyVersion}"
         compile "org.codehaus.groovy:groovy:$groovyVersion"
         compile "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
@@ -216,6 +218,7 @@ subprojects { project ->
     configurations {
         all {
             resolutionStrategy {
+                println "3 --- ${groovyVersion}"
                 force "org.codehaus.groovy:groovy:$groovyVersion"
                 force "org.codehaus.groovy:groovy-dateutil:$groovyVersion"
                 force "org.codehaus.groovy:groovy-xml:$groovyVersion"
@@ -246,7 +249,10 @@ subprojects { project ->
 
         publications {
             maven(MavenPublication) {
-                artifactId projectInfo.projectArtifactId
+                println "4 --- ${groovyVersion}"
+                groupId = 'seans.fancy.stuff'
+                artifactId = projectInfo.projectArtifactId
+                version = '9.1'
                 from components.java
 
                 afterEvaluate {
