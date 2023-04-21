@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2"
@@ -232,7 +233,11 @@ subprojects { project ->
 
         publications {
             maven(MavenPublication) {
-                artifactId projectInfo.projectArtifactId
+                println "GROOVY VERSION --- ${groovyVersion}"
+                groupId = 'seans.fancy.stuff'
+                artifactId = projectInfo.projectArtifactId
+                version = '9.1'
+
                 from components.java
 
                 if(!isGrails2PluginProject) {                    
